@@ -1,0 +1,49 @@
+﻿<Window x:Class="FlattenFiles.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlattenFiles"
+        mc:Ignorable="d" x:Name="TheMainWindow"
+        Title="文件展平工具" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid DataContext="{Binding ElementName=TheMainWindow, Path=Options }"
+                Margin="5 2">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <StackPanel x:Name="OptionPanel">
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Height" Value="22"></Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Label>包含的文件后缀名(名称包括 .),以 ; 号间隔多个后缀名，举例：.png; .jpg</Label>
+                    <TextBox Text="{Binding ExtFilter}"></TextBox>
+                    <Label>待处理的文件夹</Label>
+                    <TextBox Text="{Binding InputFolder}"></TextBox>
+                    <Label>输出文件夹</Label>
+                    <TextBox Text="{Binding OutputFolder}"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 3 0 0">
+                    <Label>移动还是复制</Label>
+                    <RadioButton VerticalAlignment="Center" IsChecked="{Binding IsCopy}">复制</RadioButton>
+                    <RadioButton VerticalAlignment="Center" IsChecked="{Binding IsMove}">移动</RadioButton>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0 8">
+                <Button Width="240" Height="36" Click="Execute_OnClick">执行</Button>
+            </StackPanel>
+
+        </StackPanel>
+
+        <TextBox Grid.Row="1" TextWrapping="Wrap" AcceptsReturn="True" Height="Auto" IsReadOnly="True" x:Name="InfoTextBox"
+                 VerticalScrollBarVisibility="Auto"></TextBox>
+
+    </Grid>
+</Window>
